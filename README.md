@@ -6,7 +6,7 @@ A modern HR Performance Dashboard built with Next.js 14, featuring real-time emp
 
 ### 🔐 Authentication
 
-- Custom login and signup pages with Flam branding
+- Custom login and signup pages 
 - Protected routes using NextAuth.js
 - Secure session management
 - Automatic redirect to login for unauthenticated users
