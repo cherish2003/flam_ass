@@ -109,4 +109,4 @@ npm run dev
 
 <img width="1440" alt="Screenshot 2025-05-26 at 3 39 04 PM" src="https://github.com/user-attachments/assets/2bd4b315-3cf3-472c-a70f-90e7d6f5125f" />
 
-## see .env.local for reference variable for testing the project
+## Deployed link : [https://flam-ass.vercel.app/](https://flam-ass.vercel.app/)
