@@ -39,6 +39,7 @@ export function FeedbackForm({ employeeId, employeeName }: FeedbackFormProps) {
   });
 
   function onSubmit(data: FeedbackFormValues) {
+    console.log('Submitting feedback:', data.feedback, 'for employee:', employeeId);
     toast.success('Feedback submitted successfully');
     form.reset();
   }
@@ -60,7 +61,7 @@ export function FeedbackForm({ employeeId, employeeName }: FeedbackFormProps) {
                 />
               </FormControl>
               <FormDescription>
-                Provide constructive feedback about the employee's performance.
+                Provide constructive feedback about the employee&apos;s performance.
               </FormDescription>
               <FormMessage />
             </FormItem>

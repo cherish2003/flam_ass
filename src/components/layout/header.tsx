@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Sun, Moon, Search } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { setSearchTerm } from '@/store/slices/employeesSlice';
+import Link from 'next/link';
 
 export function Header() {
   const { theme, setTheme } = useTheme();
@@ -13,11 +14,11 @@ export function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <div className="mr-4 md:flex">
-          <a className="hidden sm:block ml-3 mr-6 flex items-center space-x-2" href="/">
+          <Link className="hidden sm:block ml-3 mr-6 flex items-center space-x-2" href="/">
             <span className="font-bold text-xl">
               Flam
             </span>
-          </a>
+          </Link>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full max-w-[300px] flex-1 md:w-[300px] md:flex-none ml-14 md:ml-0">

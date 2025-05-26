@@ -3,7 +3,7 @@
 import { use, useState } from 'react';
 import { useAppSelector } from '@/store/hooks';
 import { notFound } from 'next/navigation';
-import { Employee, RootState } from '@/types';
+import { RootState } from '@/types';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';

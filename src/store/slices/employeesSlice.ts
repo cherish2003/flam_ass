@@ -10,6 +10,42 @@ export interface Employee {
   department: string;
   performanceRating: number;
   image: string;
+  phone: string;
+  address: {
+    street: string;
+    city: string;
+    state: string;
+    postalCode: string;
+  };
+  company: {
+    department: string;
+    title: string;
+  };
+}
+
+interface DummyJsonUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  age: number;
+  image: string;
+  phone: string;
+  address: {
+    address: string;
+    city: string;
+    state: string;
+    postalCode: string;
+  };
+  company: {
+    department: string;
+    title: string;
+  };
+}
+
+interface FetchEmployeesResponse {
+  users: DummyJsonUser[];
+  total: number;
 }
 
 const initialState: EmployeesState = {
@@ -41,13 +77,29 @@ export const fetchEmployees = createAsyncThunk(
       throw new Error('Failed to fetch employees');
     }
     
-    const data = await response.json();
+    const data = await response.json() as FetchEmployeesResponse;
 
     const departments = ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance'];
-    const enrichedEmployees = data.users.map((user: any) => ({
-      ...user,
+    const enrichedEmployees = data.users.map((user: DummyJsonUser) => ({
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      age: user.age,
       department: departments[Math.floor(Math.random() * departments.length)],
       performanceRating: Math.floor(Math.random() * 5) + 1,
+      image: user.image,
+      phone: user.phone,
+      address: {
+        street: user.address.address,
+        city: user.address.city,
+        state: user.address.state,
+        postalCode: user.address.postalCode,
+      },
+      company: {
+        department: user.company.department,
+        title: user.company.title,
+      },
     }));
 
     return {

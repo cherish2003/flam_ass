@@ -1,11 +1,34 @@
 import type { Employee } from '@/types';
 
+interface DummyJsonUser {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  age: number;
+  image: string;
+  phone: string;
+  address: {
+    address: string;
+    city: string;
+    state: string;
+    postalCode: string;
+  };
+  company: {
+    department: string;
+    title: string;
+  };
+}
+
+interface DummyJsonResponse {
+  users: DummyJsonUser[];
+}
 
 export async function fetchEmployees(): Promise<Employee[]> {
   const response = await fetch('https://dummyjson.com/users?limit=20');
-  const data = await response.json();
+  const data = await response.json() as DummyJsonResponse;
 
-  return data.users.map((user: any) => ({
+  return data.users.map((user: DummyJsonUser) => ({
     id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
@@ -22,7 +45,7 @@ export async function fetchEmployees(): Promise<Employee[]> {
       postalCode: user.address.postalCode,
     },
     company: {
-      department:user.company.department,
+      department: user.company.department,
       title: user.company.title,
     },
   }));

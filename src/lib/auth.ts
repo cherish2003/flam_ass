@@ -3,6 +3,18 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectDB } from "./db";
 import { User } from "@/models/User";
 import bcrypt from "bcryptjs";
+import "next-auth";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -10,25 +22,28 @@ export const authOptions: NextAuthOptions = {
       name: "credentials",
       credentials: {
         email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Please provide all required fields');
+          throw new Error("Please provide all required fields");
         }
 
         await connectDB();
-        
+
         const user = await User.findOne({ email: credentials.email });
-        
+
         if (!user) {
-          throw new Error('No user found');
+          throw new Error("No user found");
         }
 
-        const isPasswordMatch = await bcrypt.compare(credentials.password, user.password);
+        const isPasswordMatch = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
 
         if (!isPasswordMatch) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
         return {
@@ -37,13 +52,13 @@ export const authOptions: NextAuthOptions = {
           email: user.email,
           image: user.image,
         };
-      }
-    })
+      },
+    }),
   ],
   pages: {
-    signIn: '/login',
-    newUser: '/signup',
-    error: '/login',
+    signIn: "/login",
+    newUser: "/signup",
+    error: "/login",
   },
   session: {
     strategy: "jwt",
@@ -68,4 +83,4 @@ export const authOptions: NextAuthOptions = {
     },
   },
   secret: process.env.NEXTAUTH_SECRET,
-}; 
+};

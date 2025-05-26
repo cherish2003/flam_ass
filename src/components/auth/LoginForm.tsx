@@ -62,7 +62,7 @@ export default function LoginForm() {
           router.refresh();
         }, 1500);
       }
-    } catch (error) {
+    } catch {
       setError("An error occurred. Please try again.");
     } finally {
       setIsPending(false);
@@ -132,7 +132,7 @@ export default function LoginForm() {
 
       <div className="text-sm text-center">
         <Link href="/signup" className="text-gray-900 ">
-          Don't have an account? Sign up
+          Don&apos;t have an account? Sign up
         </Link>
       </div>
     </div>

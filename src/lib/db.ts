@@ -1,7 +1,13 @@
 import mongoose from 'mongoose';
 
+interface GlobalMongoose {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+}
+
 declare global {
-  var mongoose: any;
+  // eslint-disable-next-line no-var
+  var mongoose: GlobalMongoose | undefined;
 }
 
 const MONGODB_URI = process.env.MONGODB_URI!;
@@ -10,10 +16,10 @@ if (!MONGODB_URI) {
   throw new Error('Please define the MONGODB_URI environment variable');
 }
 
-let cached = global.mongoose;
+const cached: GlobalMongoose = global.mongoose || { conn: null, promise: null };
 
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+if (!global.mongoose) {
+  global.mongoose = cached;
 }
 
 export async function connectDB() {

@@ -5,7 +5,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import {
   LayoutDashboard,
-  Users,
   Bookmark,
   BarChart,
   Menu,

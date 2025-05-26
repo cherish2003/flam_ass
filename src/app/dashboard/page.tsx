@@ -1,18 +1,12 @@
 'use client';
 
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { fetchEmployees, setSelectedDepartments, setSelectedRatings, resetEmployees, incrementPage } from '@/store/slices/employeesSlice';
 import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Star, Mail, Building2, BookmarkPlus, BookmarkCheck, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { toggleBookmark } from '@/store/slices/bookmarksSlice';
-import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
 import { EmployeeCard } from '@/components/employee/employee-card';
 import { useInView } from 'react-intersection-observer';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -21,7 +15,6 @@ const departments = ['Engineering', 'Marketing', 'Sales', 'HR', 'Finance', 'Prod
 const ratings = [1, 2, 3, 4, 5];
 
 export default function DashboardPage() {
-  const router = useRouter();
   const dispatch = useAppDispatch();
   const { 
     employees, 
@@ -66,10 +59,6 @@ export default function DashboardPage() {
 
     return matchesSearch && matchesDepartment && matchesRating;
   });
-
-  const handlePromote = (employeeId: number) => {
-    toast.success('Employee promoted successfully!');
-  };
 
   if (error) {
     return (
